@@ -3,16 +3,19 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: nowl <nowl@student.42.fr>                  +#+  +:+       +#+         #
+#    By: mgras <mgras@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/02/27 23:00:31 by nowl              #+#    #+#              #
-#    Updated: 2015/02/27 23:13:36 by nowl             ###   ########.fr        #
+#    Updated: 2015/02/28 16:48:05 by mgras            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 SRC_PATH = ./src/
 
 SRC_NAME =	ft_kernel.c \
+			ft_grid_maker.c \
+			ft_pos.c \
+			ft_menu.c \
 
 SRC = $(addprefix $(SRC_PATH), $(SRC_NAME))
 
@@ -30,12 +33,12 @@ NAME = game_2048
 
 CC = gcc
 
-CFLAGS = -Wall -Wextra -Werror -lncurses -lcurses
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
 $(NAME) : $(OBJ)
-	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJ) -g
+	$(CC) $(CFLAGS) $(INC) -o $(NAME) $(OBJ) -g -lncurses
 
 $(OBJ_PATH)%.o : $(SRC_PATH)%.c
 	@mkdir $(OBJ_PATH) 2> /dev/null || echo "" > /dev/null
