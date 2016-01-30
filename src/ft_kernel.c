@@ -6,47 +6,40 @@
 /*   By: mgras <mgras@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/27 22:57:30 by nowl              #+#    #+#             */
-/*   Updated: 2015/02/28 17:48:05 by mgras            ###   ########.fr       */
+/*   Updated: 2015/03/01 20:50:40 by tlebrize         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_2048.h"
 
-char	ft_loop_it(int col, int row)
+static int	ft_is_winable(int checker)
 {
-	t_pos	*pos;
-	char	ch;
-
-	pos = (t_pos*)malloc(sizeof(t_pos));
-	pos = ft_init_tpos(pos);
-	ch = 'q';
-	while ((ch != 27) && (pos->row >= 25 && pos->col >= 60))
-	{
-		getmaxyx(stdscr, row, col);
-		pos = ft_set_pos(col, row, pos);
-		if (pos->scol != pos->col || pos->srow != pos->row)
-		{
-			clear();
-			ft_draw_grid(pos->col - 1, pos->row - 1);
-		}
-		ft_process_back();				//NB Proc
-		ch = getch();
-		mvprintw(0, 0, "ch = %d", ch);
-		pos->scol = pos->col;
-		pos->srow = pos->row;
-	}
-	free(pos);
-	clear();
-	ft_hight_play(col, row);
-	return (ch);
+	if (checker < 1)
+		return (0);
+	while (checker > 3)
+		checker /= 2;
+	if (checker == 2)
+		return (1);
+	else
+		return (0);
 }
 
-int		main(void)
+int			main(void)
 {
+	t_const		win;
+
+	win = WIN_VALUE;
 	initscr();
 	keypad(stdscr, TRUE);
+	raw();
 	noecho();
-	ft_menu(0, 0);
+	if (ft_is_winable((int)win))
+		ft_menu(0, 0);
+	else
+	{
+		mvprintw(5, 5, "This game is not winnable, set WIN_VALUE to 2^X !");
+		getch();
+	}
 	endwin();
 	return (0);
 }

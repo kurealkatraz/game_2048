@@ -6,13 +6,13 @@
 /*   By: mgras <mgras@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2015/02/28 12:12:05 by mgras             #+#    #+#             */
-/*   Updated: 2015/02/28 17:33:42 by mgras            ###   ########.fr       */
+/*   Updated: 2015/03/01 19:19:42 by tlebrize         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_2048.h"
 
-int		ft_make_pat(int col, int row, int rpos)
+static int		ft_make_pat(int col, int row, int rpos)
 {
 	int		citer;
 	int		riter;
@@ -37,7 +37,7 @@ int		ft_make_pat(int col, int row, int rpos)
 	return (rpos);
 }
 
-int		ft_draw_grid(int col, int row)
+int				ft_draw_grid(int col, int row)
 {
 	int		cs;
 	int		rs;
@@ -45,7 +45,7 @@ int		ft_draw_grid(int col, int row)
 
 	ss = 0;
 	rs = 0;
-	if (row < 20 || col < 60)
+	if (row < 25 || col < 61)
 		return (-1);
 	while (ss++ < 4)
 	{
